@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="pb_message">
+
+    </div>
+    <textarea name="messages" id="messages" cols="30" rows="10"></textarea>
+    <input type="text" id="message">
+    <input type="submit" value="send" id="submit">
+    {{ room_name | json_script:'room-name'}}
+    <script>
+        const roomName = JSON.parse(document.getElementById('room-name').textContent)
+        const chatSocket = new WebSocket(
+            'ws://' + window.location.host + '/ws/chat/' + roomName + '/'
+        )
+        const btn = document.querySelector('#submit')
+        btn.onclick = function () {
+            const message = document.querySelector('#message').value
+            chatSocket.send(JSON.stringify({
+            'message': message
+        }))
+        document.querySelector('#message').value = ''
+        }
+        chatSocket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+            console.log(data)
+            document.querySelector("#pb_message").innerHTML=data['tester'];
+            if (data['message']) {
+                document.querySelector('#messages').value += data['message'] + '\n';
+            }
+        }
+
+    </script>
+</body>
+</html>
