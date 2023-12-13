@@ -1,0 +1,48 @@
+body {
+    background-color: #0c3d6c;
+    font-family: emoji;
+}
+:root {
+    --mg: 20px; 
+    --btn-bg: #0f5292;
+    /* margin-top: var(--mg); */
+    /* margin-bottom: var(--mg); */
+}
+
+input[type='submit'] {
+    background-color: var(--btn-bg);
+    color: white;
+    width: 85px;
+}
+section {
+    margin-top: var(--mg);
+    margin-bottom: var(--mg);
+}
+
+/* chat css */
+.chat-container {
+    display: flex;
+    justify-content: center;
+}
+.chat-container div {
+    width: 40%;
+}
+.chat-container input{
+    margin-top: var(--mg);
+}
+#messages p:nth-child(odd) {
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+}
+#messages p:nth-child(even) {
+    background-color: var(--btn-bg);
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+}
+@media only screen and (max-width: 600px) {
+    .chat-container div {
+      width: 80%;
+    }
+  }
