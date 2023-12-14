@@ -21,5 +21,9 @@ from app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    path('register/', views.register, name='register'),
+    path('logmeout/', views.logmeout, name='logmeout'),
+    path('login/', views.logmein, name='login'),
+
     path('chat/', include('app.urls'))
 ]

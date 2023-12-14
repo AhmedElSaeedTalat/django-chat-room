@@ -6,6 +6,11 @@
 	<title>Document</title>
 </head>
 <body>
-	<h1>hello</h1>
+	
+	{% if request.user.username %}
+	<h1>hello {{ request.user }}</h1>
+	<a href="{% url 'logmeout' %}">logout</a>
+	{% endif %}
+		
 </body>
 </html>

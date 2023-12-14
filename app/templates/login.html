@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if messages %}
+    
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+        
+{% endif %}
+    
+<form class="form-group" method="post">
+    {% csrf_token %}
+    <input type="email" name="email" required class="form-control">
+    <input type="password" name="password" id="password" required class="form-control">
+    <input type="submit" name="" id="">
+</form>
+{% endblock content %}

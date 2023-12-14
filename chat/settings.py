@@ -139,8 +139,7 @@ CHANNEL_LAYERS = {
         }
     }
 }
-# CHANNEL_LAYERS = {
-#     'default': {
-#         'BACKEND': 'channels.layers.InMemoryChannelLayer',
-#     }
-# }
+""" setting authentication backend """
+AUTHENTICATION_BACKENDS = (
+        'django.contrib.auth.backends.ModelBackend',
+    )
