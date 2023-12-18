@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}    
-   
 <section class="chat-container">
     <div>
         <div id="messages"></div>
@@ -10,26 +9,42 @@
     </div>
 </section>
 <script>
+    // aquiring room name to create chat room through web socket
     const roomName = JSON.parse(document.getElementById('room-name').textContent)
+    // build websocket
     const chatSocket = new WebSocket(
         'ws://' + window.location.host + '/ws/chat/' + roomName + '/'
     )
     const btn = document.querySelector('#submit')
+    // send messages to websocket
     btn.onclick = function () {
-        const message = document.querySelector('#message').value
+        const message = document.querySelector('#message').value;
+        const username = '{{request.user.username}}';
         chatSocket.send(JSON.stringify({
-        'message': message
+        'message': message,
+        'username': username
     }))
     document.querySelector('#message').value = ''
     }
+    // pushing sent messages through web socket into a div
+    // new elements are created to add messages
     chatSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);
         if (data['message']) {
             const messages = document.querySelector('#messages');
-            const new_p = document.createElement('p');
-            const content = document.createTextNode(data.message);
-            new_p.appendChild(content);
-            messages.append(new_p);
+            const messageElement = document.createElement('span');
+            const usrElement = document.createElement('span');
+            const container = document.createElement('div');
+            usrElement.classList.add('username')
+            const msg = data.message
+            const user = data.username
+            const content_msg = document.createTextNode(msg);
+            const content_usr = document.createTextNode(user);
+            messageElement.appendChild(content_msg);
+            usrElement.appendChild(content_usr);
+            container.appendChild(messageElement);
+            container.appendChild(usrElement);
+            messages.appendChild(container)
         }
     }
 </script>
