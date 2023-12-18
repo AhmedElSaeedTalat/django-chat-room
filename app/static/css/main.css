@@ -25,7 +25,7 @@ section {
     justify-content: center;
 }
 .chat-container div:nth-child(1) {
-    width: 40%;
+    width: 60%;
 }
 .chat-container input{
     margin-top: var(--mg);
@@ -36,16 +36,21 @@ section {
     color: white;
     border-radius: 5px;
     padding: 10px;
-    min-width: 100px;
+    max-width: 320px;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
 }
 #messages .username {
     font-size: 10px;
     align-self: end;
 }
 @media only screen and (max-width: 600px) {
-    .chat-container div {
+    .chat-container div:nth-child(1) {
       width: 80%;
+    }
+    #messages div {
+        width: 100%;
+        padding: 6px;
     }
   }
