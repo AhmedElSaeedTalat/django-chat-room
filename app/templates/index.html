@@ -1,16 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
 	
 	{% if request.user.username %}
 	<h1>hello {{ request.user }}</h1>
 	<a href="{% url 'logmeout' %}">logout</a>
 	{% endif %}
-		
-</body>
-</html>
+
+	{% if not request.user.username %}
+		<a href="{% url 'register' %}">register</a>
+		<a href="{% url 'login' %}">login</a>
+	{% endif %}
+	<h1>Create chat room</h1>
+	<input type="text" name="room" id="room">
+	<input type="submit" id="submit_room">
+	<script>
+		const btn = document.querySelector('#submit_room')
+		btn.onclick = function () {
+			// check if user is regestered
+			// if user is registered create room
+			// else ask for registration
+			if ('{{request.user.username}}') {
+				const room = document.querySelector('#room').value
+				window.location.href = `chat/${room}/`;
+			} else {
+				alert('kindly register or login to be able to access the chat room')
+			}
+		}		
+	</script>
+{% endblock content %}
+
