@@ -18,6 +18,8 @@ def room(request, room_name):
 
 def register(request):
     """ function to register """
+    if request.user.username:
+        return redirect('home')
     form = CustomUserCreationForm()
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
@@ -39,10 +41,11 @@ def register(request):
 
 def logmein(request):
     """ view function to login in user """
+    if request.user.username:
+        return redirect('home')
     if request.method == 'POST':
         email = request.POST['email']
         username = email.split('@')[0]
-
         password = request.POST['password']
         user = authenticate(
             username=username,
