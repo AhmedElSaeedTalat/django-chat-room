@@ -43,11 +43,13 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
         """ receive sent message """
         info = json.loads(text_data)
         message = info['message']
+        username = info['username']
         await self.channel_layer.group_send(
             self.room_group_name,
             {
                 'type': 'chat_message',
-                'message': message
+                'message': message,
+                'username': username
             }
             )
 
@@ -56,4 +58,9 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
             send message received back to chat room trough web socket so all can see it
         """
         message = event['message']
-        await self.send(text_data=json.dumps({'message': message}))
+        username = event['username']
+        data = {
+            'username': username,
+            'message': message
+        }
+        await self.send(text_data=json.dumps(data))
