@@ -24,22 +24,25 @@ section {
     display: flex;
     justify-content: center;
 }
-.chat-container div {
+.chat-container div:nth-child(1) {
     width: 40%;
 }
 .chat-container input{
     margin-top: var(--mg);
 }
-#messages p:nth-child(odd) {
-    background-color: white;
-    border-radius: 5px;
-    padding: 10px;
-}
-#messages p:nth-child(even) {
+
+#messages div {
     background-color: var(--btn-bg);
     color: white;
     border-radius: 5px;
     padding: 10px;
+    min-width: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+#messages .username {
+    font-size: 10px;
+    align-self: end;
 }
 @media only screen and (max-width: 600px) {
     .chat-container div {
