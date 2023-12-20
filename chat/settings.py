@@ -143,3 +143,4 @@ CHANNEL_LAYERS = {
 AUTHENTICATION_BACKENDS = (
         'django.contrib.auth.backends.ModelBackend',
     )
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'

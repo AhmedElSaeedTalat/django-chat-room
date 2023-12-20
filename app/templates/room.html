@@ -26,25 +26,38 @@
     }))
     document.querySelector('#message').value = ''
     }
+    function create_elements(msg, user) {
+        // function to create elements and populate them
+        // with sent messages
+        // Args:
+        // msg - sent message through web socket
+        // user - the user that sent the message
+        const messages = document.querySelector('#messages');
+        const messageElement = document.createElement('span');
+        const usrElement = document.createElement('span');
+        const container = document.createElement('div');
+        usrElement.classList.add('username')
+        const content_msg = document.createTextNode(msg);
+        const content_usr = document.createTextNode(user);
+        messageElement.appendChild(content_msg);
+        usrElement.appendChild(content_usr);
+        container.appendChild(messageElement);
+        container.appendChild(usrElement);
+        messages.appendChild(container)
+    }
     // pushing sent messages through web socket into a div
     // new elements are created to add messages
     chatSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);
-        if (data['message']) {
-            const messages = document.querySelector('#messages');
-            const messageElement = document.createElement('span');
-            const usrElement = document.createElement('span');
-            const container = document.createElement('div');
-            usrElement.classList.add('username')
-            const msg = data.message
-            const user = data.username
-            const content_msg = document.createTextNode(msg);
-            const content_usr = document.createTextNode(user);
-            messageElement.appendChild(content_msg);
-            usrElement.appendChild(content_usr);
-            container.appendChild(messageElement);
-            container.appendChild(usrElement);
-            messages.appendChild(container)
+        if (data.type === 'saved_msg') {
+            // post saved messages to newly connected users
+            for (let i = 0; i < data.saved_msg.length; i++) {
+                create_elements(data.saved_msg[i]['message'], data.saved_msg[i]['user']);
+            }
+        }
+        if (data['msg']) {
+            // post sent messages by all users
+            create_elements(data['msg'], data['username']);
         }
     }
 </script>

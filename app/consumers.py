@@ -1,6 +1,12 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
+from channels.layers import get_channel_layer
+from asgiref.sync import sync_to_async
 import json
 import redis
+
+    
+    
+
 class ChatRoomConsumer(AsyncWebsocketConsumer):
     """ class for web socket connection and sending and receiveing """
     async def connect(self):
@@ -13,23 +19,26 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
             self.room_group_name,
             self.channel_name
         )
+        """ create session to save messages """
+        self.session = self.scope['session']
+        if 'messages' not in self.session:
+            self.session['messages'] = []
         """ this one to accept connection """
         await self.accept()
+        """ 
+            check if there are saved messages
+            if true: call send_msg to send saved
+            msgs to newly connected user
+        """
+        if 'messages' in self.session:
+            if len(self.session['messages']) > 0:
+                await self.send_msg()
 
-        """ send message to all group members """
-        await self.channel_layer.group_send(
-            self.room_group_name,
-            {
-                'type': 'tester_message',
-                'tester': 'hello world'
-            }
-        )
-    
-    async def tester_message(self, event):
-        """ send message to all as for testing """
-        tester = event['tester']
+    async def send_msg(self):
+        """ send message to newly connected users """
         await self.send(text_data=json.dumps({
-            'tester': tester
+            'type': 'saved_msg',
+            'saved_msg': self.session['messages']
         }))
 
     async def disconnect(self, close_code):
@@ -40,7 +49,10 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
         )
 
     async def receive(self, text_data):
-        """ receive sent message """
+        """ 
+            receive sent message
+            publish received msgs
+        """
         info = json.loads(text_data)
         message = info['message']
         username = info['username']
@@ -59,8 +71,22 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
         """
         message = event['message']
         username = event['username']
+        """ 
+            save sent messages in session list
+            clear session if messsages are more
+            than 4 messages and start saving again
+        """
+        if len(self.session['messages']) <= 4:
+            self.session['messages'].append({'message': message, 'user': username})
+            await sync_to_async(self.session.save)()
+        else:
+            self.session['messages'].clear()
+            await sync_to_async(self.session.save)()
+            self.session['messages'].append({'message': message, 'user': username})
+            await sync_to_async(self.session.save)()
+
         data = {
             'username': username,
-            'message': message
+            'msg': message
         }
         await self.send(text_data=json.dumps(data))
