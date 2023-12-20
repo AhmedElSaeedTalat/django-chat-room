@@ -1,20 +1,12 @@
 {% extends 'base.html' %}
-
 {% block content %}
-	
-	{% if request.user.username %}
-	<h1>hello {{ request.user }}</h1>
-	<a href="{% url 'logmeout' %}">logout</a>
-	{% endif %}
-
-	{% if not request.user.username %}
-		<a href="{% url 'register' %}">register</a>
-		<a href="{% url 'login' %}">login</a>
-	{% endif %}
-	<h1>Create or join chat room</h1>
-	<input type="text" name="room" id="room">
-	<input type="submit" id="submit_room">
-	
+	<section class="create_chat">
+		<div>
+			<h3>Create or join chat room</h3>
+			<input type="text" name="room" id="room" class="form-control">
+			<input type="submit" id="submit_room" class="btn">
+		</div>
+	</section>
 	<script>
 		const btn = document.querySelector('#submit_room')
 		btn.onclick = function (e) {

@@ -5,8 +5,6 @@ import json
 import redis
 
     
-    
-
 class ChatRoomConsumer(AsyncWebsocketConsumer):
     """ class for web socket connection and sending and receiveing """
     async def connect(self):
