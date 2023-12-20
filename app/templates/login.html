@@ -1,19 +1,25 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-
 {% if messages %}
-    
     {% for message in messages %}
         {{ message }}
     {% endfor %}
-        
 {% endif %}
-    
-<form class="form-group" method="post">
-    {% csrf_token %}
-    <input type="email" name="email" required class="form-control">
-    <input type="password" name="password" id="password" required class="form-control">
-    <input type="submit" name="" id="">
-</form>
+<section class="registration">
+    <div>
+        <form class="form-group" method="post">
+            {% csrf_token %}
+            <label for="email">Email</label>
+            <input type="email" name="email" required class="form-control">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required class="form-control">
+            <input type="submit" class="btn" id="submit_login">
+        </form>
+        <div class="img">
+            <img src="{% static 'img/chat.jpg' %}" alt="chat image">
+            <h4>enjoy our chat services</h4>
+        </div>
+</div>
+</section>
 {% endblock content %}

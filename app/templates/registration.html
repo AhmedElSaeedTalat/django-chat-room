@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
-<form class="form-group" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" name="" id="">
-</form>
+<section class="registration">
+    <div>
+        <form class="form-group" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn">
+        </form>
+        <div class="img">
+            <img src="{% static 'img/chat.jpg' %}" alt="chat image">
+            <h4>enjoy our chat services</h4>
+        </div>
+    </div>
+</section>
 {% endblock content %}

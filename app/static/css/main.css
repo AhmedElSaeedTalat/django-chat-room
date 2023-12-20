@@ -103,3 +103,67 @@ header h3 {
         height: 100vw;
     }
 }
+
+.registration div{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.registration form, .registration .img {
+    width: 400px;
+}
+.registration label {
+    color: white;
+}
+.registration img {
+    width: 285px;
+    filter: hue-rotate(28deg);
+    border-radius: 8px;
+    transform: rotate(-11deg);
+    animation-name: do_rotate;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+}
+@keyframes do_rotate {
+    from {transform: rotate(-11deg);}
+    to {transform: rotate(0deg);}
+}
+.registration .img h4 {
+    color: white;
+    margin-top: 5px;
+    filter: blur(16px);
+    animation-name: show_p;
+    animation-duration: 4s;
+    animation-delay: 4s;
+    animation-fill-mode: forwards;
+}
+@keyframes show_p {
+    from {filter: blur(16px);}
+    to {filter: blur(0px);}
+}
+@media only screen and (max-width: 600px) {
+    .registration div {
+        width: 80%;
+    }
+    .registration .img {
+        margin-top: 10px;
+    }
+    .registration form, .registration .img {
+        width: 100%;
+    }
+    .registration img {
+        width: 80%;
+    }
+    .registration {
+        display: flex;
+        justify-content: center;
+    }
+}
+@media only screen and (min-width: 760px) and (max-width: 790px) {
+    .registration .img {
+        margin-top: 10px;
+    }
+}
+#submit_login {
+    margin-top: 10px;
+}
