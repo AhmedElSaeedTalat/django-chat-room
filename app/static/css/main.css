@@ -119,6 +119,12 @@ header h3 {
     justify-content: space-around;
     flex-wrap: wrap;
 }
+.registration .message {
+    color: white;
+}
+.errorlist li {
+    color: white;
+}
 .registration form, .registration .img {
     width: 400px;
 }

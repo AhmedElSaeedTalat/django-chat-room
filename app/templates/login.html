@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-{% if messages %}
-    {% for message in messages %}
-        {{ message }}
-    {% endfor %}
-{% endif %}
 <section class="registration">
     <div>
         <form class="form-group" method="post">
             {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                <p class="message">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
             <label for="email">Email</label>
             <input type="email" name="email" required class="form-control">
             <label for="password">Password</label>
