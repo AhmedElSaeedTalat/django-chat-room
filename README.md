@@ -5,6 +5,8 @@
 4. [Technologies](#technologies)
 5. [Installation](#installation)
 6. [Author](#author)
+7. [url](#url)
+
 
 ## Description:
 A project for chat rooms, user can create or join chat rooms after being authenticated
@@ -30,7 +32,9 @@ A project for chat rooms, user can create or join chat rooms after being authent
 ## Installation
 $ Clone the repository: `git clone https://github.com/AhmedElSaeedTalat/django-chat-room`  
 $ Run the app: `daphne -b 0.0.0.0 -p 8000 chat.asgi:application`
-  
 
 ## Author:
 Ahmed Talat [Github](https://github.com/AhmedElSaeedTalat) | [twitter](https://twitter.com/AhmedElsaeed105)
+
+## url
+deployed on heroku [chat](https://chatappdjango-4abfd00ba3fb.herokuapp.com/)
