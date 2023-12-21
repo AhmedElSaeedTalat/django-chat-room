@@ -13,7 +13,7 @@
     const roomName = JSON.parse(document.getElementById('room-name').textContent)
     // build websocket
     const chatSocket = new WebSocket(
-        'ws://' + window.location.host + '/ws/chat/' + roomName + '/'
+        'wss://' + window.location.host + '/ws/chat/' + roomName + '/'
     )
     const btn = document.querySelector('#submit')
     // send messages to websocket
