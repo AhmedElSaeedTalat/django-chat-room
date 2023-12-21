@@ -107,7 +107,6 @@ if IS_HEROKU_APP:
             conn_max_age=600,
             conn_health_checks=True,
             ssl_require=True,
-            sslmode='require',
         ),
     }
 else:
