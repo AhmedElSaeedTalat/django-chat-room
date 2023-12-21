@@ -156,14 +156,24 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ASGI_APPLICATION = "chat.asgi.application"
-CHANNEL_LAYERS = {
+if IS_HEROKU_APP:
+    CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': [('127.0.0.1', 6379)]
+            "hosts": ['redis://:pa7ac384edee7db38e33907f38c1d0043f02ac24b4c41b85ca735cda1b23cf223@ec2-52-1-19-52.compute-1.amazonaws.com:19529'],
+        },
+    },
+}
+else:
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels_redis.core.RedisChannelLayer',
+            'CONFIG': {
+                'hosts': [('127.0.0.1', 6379)]
+            }
         }
     }
-}
 """ setting authentication backend """
 AUTHENTICATION_BACKENDS = (
         'django.contrib.auth.backends.ModelBackend',
