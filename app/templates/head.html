@@ -1,9 +1,13 @@
+{% load static %}
 <header>
+    <div>
+        <a href="{% url 'home' %}">Home</a>
+    </div>
     {% if request.user.username %}
     <div>
+        <a href="#">{{ request.user }}</a>
         <a href="{% url 'logmeout' %}">logout</a>
     </div>
-	<h3>welcome {{ request.user }}</h3>
 	{% endif %}
 
 	{% if not request.user.username %}

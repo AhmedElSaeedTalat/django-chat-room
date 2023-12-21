@@ -1,10 +1,10 @@
 body {
-    background-color: #0c3d6c;
+    background-color: #152050;
     font-family: emoji;
 }
 :root {
     --mg: 20px; 
-    --btn-bg: #0f5292;
+    --btn-bg: #3c3c83;
     /* margin-top: var(--mg); */
     /* margin-bottom: var(--mg); */
 }
@@ -13,6 +13,10 @@ input[type='submit'] {
     background-color: var(--btn-bg);
     color: white;
     width: 85px;
+}
+input[type='submit']:hover {
+    background-color: #404097;
+    color: white;
 }
 section {
     margin-top: var(--mg);
@@ -55,12 +59,18 @@ section {
     }
 }
 header {
+    display: flex;
+    justify-content: space-between;
     color: white;
 }
-header div {
-    display: flex;
-    justify-content: end;
+header div:nth-child(1) {
     padding-right: 10px;
+}
+header div:nth-child(1){
+    margin-left: 10px;
+}
+header div:nth-child(2){
+    margin-right: 10px;
 }
 header a {
     color: white;
