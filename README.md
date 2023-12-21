@@ -7,7 +7,7 @@
 6. [Author](#author)
 
 ## Description:
-A project for chat rooms
+A project for chat rooms, user can create or join chat rooms after being authenticated
 
 ## Services provided
 1. registration and login. 
