@@ -170,5 +170,5 @@ AUTHENTICATION_BACKENDS = (
     )
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 CSRF_TRUSTED_ORIGINS = [
-    'https://chatappdjango-4abfd00ba3fb.herokuapp.com/'
+    'https://chatappdjango-4abfd00ba3fb.herokuapp.com'
 ]
