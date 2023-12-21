@@ -24,7 +24,7 @@ A project for chat rooms, user can create or join chat rooms after being authent
 * Django: Version 3.0.0
 * Python: Version 3.8.10 
 * REDIS: Version 5.0.7
-* PostgreSQL Version 12.17
+* Sqlite
 * HTML, CSS, JS
 
 ## Installation
