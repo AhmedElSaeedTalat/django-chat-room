@@ -21,6 +21,15 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
         self.session = self.scope['session']
         if 'messages' not in self.session:
             self.session['messages'] = []
+        """ 
+            check if new channel is created
+            if it's new channel clear saved
+            messages
+        """
+        if 'group_name' in self.session:
+            if self.session['group_name'] != self.room_group_name:
+                self.session['messages'] = []
+        self.session['group_name'] = self.room_group_name
         """ this one to accept connection """
         await self.accept()
         """ 
