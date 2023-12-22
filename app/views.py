@@ -18,7 +18,13 @@ def home(request):
     return render(request, 'index.html', {'request': request})
 
 def room(request, room_name):
-    """ return room for the chat """
+    """ 
+        return room for the chat
+        if user is not registered redirect
+        to home page
+    """
+    if not request.user.username:
+        return redirect('home')
     return render(request, 'room.html', {'room_name': room_name})
 
 def register(request):
